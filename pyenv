@@ -1,0 +1,92 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+
+_remove_env() {
+	if [[ ! -d ~/Venvs/$1 ]] ; then
+		echo "${RED}Error${NC}: Environment $1 does not exist."
+		return -1
+	fi
+
+	if [ $1 = "default" ] ; then
+		echo "${RED}Error${NC}: Cannot remove default environment."
+		return -1
+	fi
+
+	rm -r ~/Venvs/$1
+	echo "Environment $1 ${RED}removed${NC}."
+}
+
+
+_create_env() {
+
+	# Environment already exists
+	if [ -d ~/Venvs/$1 ] ; then
+		echo "${RED}Error${NC}: Environment $1 already exists. Skip (-c) to activate."
+		return -1
+	fi
+
+	python3 -m venv ~/Venvs/$1
+	source ~/Venvs/$1/bin/activate
+	echo "Environment $1 ${GREEN}created${NC}."
+}
+
+
+_activate_env() {
+	source ~/Venvs/$1/bin/activate
+}
+
+
+pyenv() {
+	env_name="default"
+	action="default"
+
+	while [ ! $# -eq 0 ]
+		do
+			case "$1" in
+
+				--help | -h)
+					echo "No options will activate the passed environment."
+					echo "	-h, --help			Show help."
+					echo "	-c, --create			Create new environment."
+					echo "	-r, --remove			Remove environment."
+					;;
+
+				--create | -c)
+					action="create"
+					;;
+
+				--remove | -r)
+					action="remove"
+					;;
+
+				--list | -l)
+					ls ~/Venvs/
+					return 0
+					;;
+
+				*)
+					env_name=$1
+					;;
+
+			esac
+			shift
+		done
+
+	case "$action" in
+		default)
+			_activate_env $env_name
+			;;
+		create)
+			_create_env $env_name
+			_activate_env $env_name
+			;;
+		remove)
+			deactivate &> /dev/null
+			_remove_env $env_name
+	esac
+
+}
