@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/bin/zsh
 
 GIT_DIR="/Users/jurabrazdil/Git"
 ENV_DIR="/Users/jurabrazdil/Venvs"
 
 PYTHON="/usr/local/bin/python3.10"
+ATOM="/usr/local/bin/atom"
 
 _remove_env() {
 	if [[ ! -d ~/Venvs/$1 ]] ; then
@@ -41,14 +42,14 @@ _activate_env() {
 
 
 _open_atom() {
-	atom "$(basename "$VIRTUAL_ENV" | awk '{print "~/Git/"$1}')"
+	$ATOM "$(basename "$VIRTUAL_ENV" | awk '{print "~/Git/"$1}')"
 }
 
 
 pyenv() {
 	env_name="default"
 	action="default"
-	atom=false
+	open_atom=false
 
 	while [ ! $# -eq 0 ]
 		do
@@ -78,7 +79,7 @@ pyenv() {
 					;;
 
 				--atom | -a)
-					atom=true
+					open_atom=true
 					;;
 
 				*)
@@ -92,7 +93,7 @@ pyenv() {
 	case "$action" in
 		default)
 			_activate_env $env_name
-			if [ $atom = true ] ; then
+			if [ $open_atom = true ] ; then
 				_open_atom
 			fi
 			cd $GIT_DIR/$env_name

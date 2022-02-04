@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 freeport() {
 	lsof -t -i tcp:"$1" | xargs kill

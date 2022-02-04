@@ -9,6 +9,7 @@ django() {
 
 	if [ ! -f $manage_path ] ; then  # No project/manage.py
 		echo "${RED}Error${NC}: Could not locate Django manage.py file."
+		return -1
 	fi
 
 	if [ $# -eq 0 ] ; then
