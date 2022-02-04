@@ -1,0 +1,49 @@
+#!/bin/bash
+
+
+django() {
+
+	project_name=$(basename $PWD)
+	manage_path="$PWD/${project_name}/manage.py"
+
+	if [ ! -f $manage_path ] ; then  # No project/manage.py
+		if [ ! -f "./manage.py" ] ; then
+			echo "${RED}Error${NC}: Could not locate Django manage.py file."
+			return -1
+		else
+			manage_path="./manage.py"
+		fi
+	fi
+
+	if [ $# -eq 0 ] ; then
+		echo "Django project ${GREEN}ready${NC}."
+	fi
+
+	while [ ! $# -eq 0 ]
+		do
+			case "$1" in
+
+				--help | -h)
+					echo "Django shortcut."
+					echo "	-c, --check			Run Django manage.py check."
+					echo "	-s, --shell			Run Django shell plus."
+					echo ""
+					;;
+
+				--check | -c)
+					python $manage_path check
+					;;
+
+				--shell | -s)
+					python $manage_path shell_plus
+					;;
+
+				*)
+					echo "${RED}Error${NC}: Unknown parameter $1."
+					;;
+
+			esac
+			shift
+		done
+
+}
