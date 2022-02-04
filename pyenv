@@ -3,6 +3,7 @@
 GIT_DIR="/Users/jurabrazdil/Git"
 ENV_DIR="/Users/jurabrazdil/Venvs"
 
+PYTHON="/usr/local/bin/python3.10"
 
 _remove_env() {
 	if [[ ! -d ~/Venvs/$1 ]] ; then
@@ -28,7 +29,7 @@ _create_env() {
 		return -1
 	fi
 
-	python3 -m venv ~/Venvs/$1
+	$PYTHON -m venv ~/Venvs/$1
 	source "$ENV_DIR"/$1/bin/activate
 	echo "Environment $1 ${GREEN}created${NC}."
 }
