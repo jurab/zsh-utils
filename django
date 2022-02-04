@@ -4,15 +4,11 @@
 django() {
 
 	project_name=$(basename $PWD)
-	manage_path="$PWD/${project_name}/manage.py"
+	project_path="$PWD"
+	manage_path="${project_path}/${project_name}/manage.py"
 
 	if [ ! -f $manage_path ] ; then  # No project/manage.py
-		if [ ! -f "./manage.py" ] ; then
-			echo "${RED}Error${NC}: Could not locate Django manage.py file."
-			return -1
-		else
-			manage_path="./manage.py"
-		fi
+		echo "${RED}Error${NC}: Could not locate Django manage.py file."
 	fi
 
 	if [ $# -eq 0 ] ; then
