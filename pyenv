@@ -1,8 +1,8 @@
 #!/bin/bash
 
+GIT_DIR="/Users/jurabrazdil/Git"
+ENV_DIR="/Users/jurabrazdil/Venvs"
 
-GIT_DIR="~/Git"
-ENV_DIR="~/Venvs"
 
 _remove_env() {
 	if [[ ! -d ~/Venvs/$1 ]] ; then
@@ -15,7 +15,7 @@ _remove_env() {
 		return -1
 	fi
 
-	rm -r ~/Venvs/$1
+	rm -rf ~/Venvs/$1
 	echo "Environment $1 ${RED}removed${NC}."
 }
 
@@ -23,24 +23,24 @@ _remove_env() {
 _create_env() {
 
 	# Environment already exists
-	if [ -d $ENV_DIR/$1 ] ; then
+	if [ -d "$ENV_DIR"/$1 ] ; then
 		echo "${RED}Error${NC}: Environment $1 already exists. Skip (-c) to activate."
 		return -1
 	fi
 
 	python3 -m venv ~/Venvs/$1
-	source $ENV_DIR/$1/bin/activate
+	source "$ENV_DIR"/$1/bin/activate
 	echo "Environment $1 ${GREEN}created${NC}."
 }
 
 
 _activate_env() {
-	source $ENV_DIR/$1/bin/activate
+	source "$ENV_DIR"/$1/bin/activate
 }
 
 
 _open_atom() {
-	atom "$(basename $VIRTUAL_ENV | awk '{print "~/Git/"$1}')"
+	atom "$(basename "$VIRTUAL_ENV" | awk '{print "~/Git/"$1}')"
 }
 
 
