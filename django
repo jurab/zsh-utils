@@ -20,7 +20,7 @@ django() {
 			case "$1" in
 
 				--help | -h)
-					echo "Django shortcut."
+					echo "Django shortcut, unknown commands are forwarded to manage.py"
 					echo "	-c, --check			Run Django manage.py check."
 					echo "	-s, --shell			Run Django shell plus."
 					echo ""
@@ -39,7 +39,7 @@ django() {
 					;;
 
 				*)
-					echo "${RED}Error${NC}: Unknown parameter $1."
+					python $manage_path "$@"
 					;;
 
 			esac
