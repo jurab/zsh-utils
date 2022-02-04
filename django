@@ -34,6 +34,10 @@ django() {
 					python $manage_path shell_plus
 					;;
 
+				--requirements | -r)
+					pip install -r $project_path/requirements.txt
+					;;
+
 				*)
 					echo "${RED}Error${NC}: Unknown parameter $1."
 					;;
