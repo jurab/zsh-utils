@@ -46,7 +46,7 @@ _open_atom() {
 }
 
 
-pyenv() {
+py() {
 	env_name="default"
 	action="default"
 	open_atom=false

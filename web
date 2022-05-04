@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+
+web() {
+
+	while [ ! $# -eq 0 ]
+		do
+			case "$1" in
+
+				--help | -h)
+					echo "WebDev shortcut"
+					echo "	-s, --ssh			SSH to namecheap server."
+					echo ""
+					;;
+
+				--ssh | -s)
+					~/Git/zsh/expect/ssh
+					;;
+
+				*)
+					echo "Connecting to umelzdbi@umelainteligence.org"
+					~/Git/zsh/expect/ssh
+					;;
+
+			esac
+			shift
+		done
+
+		~/Git/zsh/expect/ssh
+
+}

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+
+boto() {
+
+	while [ ! $# -eq 0 ]
+		do
+			case "$1" in
+
+				--help | -h)
+					echo "Boto shortcut"
+					echo "	-l, --list			List objects in S3."
+					echo ""
+					;;
+
+				--ls | -l)
+
+					case $# in
+						1)
+							aws s3 ls
+							break
+							;;
+						2)
+							aws s3 ls "$2"
+							break
+							;;
+						*)
+							echo "Too many arguments."
+							break
+							;;
+					esac
+					;;
+
+				*)
+					echo "Unrecognized command"
+					;;
+
+			esac
+			shift
+		done
+
+}

@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+echo ""
+echo "  ------- my shit -------"
+echo "  boto\t\t- S3 crap"
+echo "  dj\t\t- Django stuff"
+echo "  edit_zsh\t- Well, edit zsh"
+echo "  freeport\t- Kill that motherfucker"
+echo "  py\t\t- Venv stuff"
+echo ""
+echo "  ------ rust shit ------"
+echo "  bat\t\t- cat, but cooler"
+echo "  dust\t\t- dust the drive"
+echo "  exa\t\t- ls but colors"
+echo "  sd\t\t- sed, but simpler"
+echo "  skim\t\t- skim the damn files"
+echo "  ytop\t\t- like top, but with a y"
+echo ""
